@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رخّصلي — دليل تراخيص الأعمال السعودية</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green:#1a7a4a; --green-light:#23a065; --green-pale:#e8f5ee;
+  --gold:#c9a84c; --gold-light:#f0d98a;
+  --dark:#0d1f14; --gray:#6b7a6e; --light:#f4f9f6;
+  --border:#d4e6db; --shadow:0 4px 24px rgba(26,122,74,0.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Tajawal',sans-serif;background:var(--light);color:var(--dark);min-height:100vh;direction:rtl;}
+
+header{background:linear-gradient(135deg,#0d2b1a 0%,#1a7a4a 60%,#23a065 100%);position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;top:-60px;left:-60px;width:300px;height:300px;background:rgba(201,168,76,0.08);border-radius:50%;}
+header::after{content:'';position:absolute;bottom:-80px;right:-40px;width:250px;height:250px;background:rgba(255,255,255,0.04);border-radius:50%;}
+.header-inner{max-width:860px;margin:0 auto;padding:48px 24px 40px;position:relative;z-index:1;text-align:center;}
+.logo-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(201,168,76,0.18);border:1px solid rgba(201,168,76,0.35);border-radius:50px;padding:6px 18px;margin-bottom:22px;}
+.dot{width:8px;height:8px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+.logo-badge span{color:var(--gold-light);font-size:12px;font-weight:500;}
+header h1{font-family:'Cairo',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;line-height:1.2;margin-bottom:12px;}
+header h1 span{color:var(--gold-light);}
+header p{color:rgba(255,255,255,.75);font-size:1.05rem;font-weight:300;max-width:520px;margin:0 auto;line-height:1.7;}
+
+main{max-width:860px;margin:0 auto;padding:40px 20px 80px;}
+
+.steps-bar{display:flex;align-items:center;justify-content:center;margin-bottom:36px;}
+.step-item{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--border);color:var(--gray);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;transition:all .3s;}
+.step-item.active .step-num{background:var(--green);color:#fff;box-shadow:0 0 0 4px rgba(26,122,74,.15);}
+.step-item.done .step-num{background:var(--green-light);color:#fff;}
+.step-label{font-size:11px;color:var(--gray);font-weight:500;}
+.step-item.active .step-label{color:var(--green);font-weight:700;}
+.step-line{width:50px;height:2px;background:var(--border);margin-bottom:18px;transition:background .3s;}
+.step-line.done{background:var(--green-light);}
+
+.card{background:#fff;border-radius:20px;box-shadow:var(--shadow);border:1px solid var(--border);padding:36px;margin-bottom:24px;animation:fadeUp .4s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.card-title{font-size:1.15rem;font-weight:700;color:var(--dark);margin-bottom:6px;}
+.card-sub{font-size:.9rem;color:var(--gray);margin-bottom:24px;}
+
+.choices-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;}
+.choice-btn{border:2px solid var(--border);background:#fff;border-radius:14px;padding:18px 14px;cursor:pointer;transition:all .2s;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;font-family:'Tajawal',sans-serif;}
+.choice-btn:hover{border-color:var(--green);background:var(--green-pale);transform:translateY(-2px);}
+.choice-btn.selected{border-color:var(--green);background:var(--green-pale);box-shadow:0 0 0 3px rgba(26,122,74,.15);}
+.choice-icon{font-size:2rem;line-height:1;}
+.choice-label{font-size:.88rem;font-weight:600;color:var(--dark);line-height:1.3;}
+.choice-btn.selected .choice-label{color:var(--green);}
+
+.city-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:10px;}
+.city-btn{border:2px solid var(--border);background:#fff;border-radius:12px;padding:14px 10px;cursor:pointer;transition:all .2s;text-align:center;font-family:'Tajawal',sans-serif;font-size:.88rem;font-weight:600;color:var(--dark);}
+.city-btn:hover{border-color:var(--green);background:var(--green-pale);}
+.city-btn.selected{border-color:var(--green);background:var(--green);color:#fff;}
+
+.cta-btn{display:block;width:100%;padding:16px;background:linear-gradient(135deg,var(--green),var(--green-light));color:#fff;border:none;border-radius:14px;font-family:'Cairo',sans-serif;font-size:1.05rem;font-weight:700;cursor:pointer;margin-top:28px;transition:all .2s;box-shadow:0 4px 16px rgba(26,122,74,.25);}
+.cta-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,122,74,.35);}
+.cta-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+.pay-card{background:#fff;border-radius:20px;border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;animation:fadeUp .4s ease both;margin-bottom:24px;}
+.pay-preview{background:linear-gradient(135deg,#f4f9f6,#e8f5ee);border-bottom:1px solid var(--border);padding:28px;text-align:center;}
+.preview-icon{font-size:3rem;margin-bottom:12px;}
+.preview-title{font-family:'Cairo',sans-serif;font-size:1.3rem;font-weight:800;color:var(--dark);margin-bottom:6px;}
+.preview-sub{color:var(--gray);font-size:.88rem;margin-bottom:18px;}
+.preview-badges{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+.preview-badge{background:#fff;border:1px solid var(--border);border-radius:30px;padding:6px 16px;font-size:.8rem;font-weight:600;color:var(--dark);}
+
+.blurred-list{padding:20px 28px 0;}
+.blur-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);}
+.blur-row:last-child{border-bottom:none;}
+.blur-num{width:32px;height:32px;background:var(--green);border-radius:50%;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.blur-content{flex:1;}
+.blur-bar{height:12px;background:#e0e0e0;border-radius:6px;margin-bottom:7px;filter:blur(3px);}
+.blur-bar.sm{height:9px;width:55%;background:#eee;}
+.blur-lock{color:var(--gray);font-size:1.1rem;flex-shrink:0;}
+
+.pay-action{padding:24px 28px 28px;text-align:center;}
+.price-row{display:inline-flex;align-items:baseline;gap:5px;margin-bottom:6px;}
+.price-amount{font-family:'Cairo',sans-serif;font-size:2.6rem;font-weight:900;color:var(--green);}
+.price-cur{font-size:1rem;font-weight:700;color:var(--green);}
+.price-desc{color:var(--gray);font-size:.82rem;margin-bottom:18px;}
+.pay-methods{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+.pay-method{background:#f8f8f8;border:1px solid var(--border);border-radius:8px;padding:5px 12px;font-size:.75rem;color:var(--gray);font-weight:600;}
+.pay-btn{display:block;width:100%;max-width:340px;margin:0 auto;padding:16px;background:linear-gradient(135deg,var(--green),var(--green-light));color:#fff;border:none;border-radius:14px;font-family:'Cairo',sans-serif;font-size:1.1rem;font-weight:700;cursor:pointer;transition:all .25s;box-shadow:0 4px 16px rgba(26,122,74,.3);}
+.pay-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,122,74,.4);}
+.pay-btn:disabled{opacity:.6;cursor:not-allowed;}
+.pay-secure{margin-top:12px;font-size:.75rem;color:#aaa;display:flex;align-items:center;justify-content:center;gap:5px;}
+
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:#fff;padding:14px 28px;border-radius:50px;font-weight:700;font-size:.9rem;box-shadow:0 8px 28px rgba(0,0,0,.2);z-index:999;transition:transform .4s cubic-bezier(.17,.67,.35,1.3);white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+.result-header{background:linear-gradient(135deg,var(--dark),#1a4a2a);border-radius:16px;padding:24px 28px;margin-bottom:20px;color:#fff;display:flex;align-items:center;gap:16px;}
+.result-icon{font-size:2.4rem;}
+.result-header h2{font-family:'Cairo',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:4px;}
+.result-header p{color:rgba(255,255,255,.6);font-size:.88rem;}
+
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.stat-box{background:#fff;border-radius:14px;border:1px solid var(--border);padding:18px 16px;text-align:center;box-shadow:var(--shadow);}
+.stat-val{font-family:'Cairo',sans-serif;font-size:1.5rem;font-weight:800;color:var(--green);margin-bottom:4px;}
+.stat-lbl{font-size:.78rem;color:var(--gray);font-weight:500;}
+
+.license-list{display:flex;flex-direction:column;gap:14px;}
+.license-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:start;animation:fadeUp .4s ease both;}
+.license-card:nth-child(2){animation-delay:.05s}
+.license-card:nth-child(3){animation-delay:.1s}
+.license-card:nth-child(4){animation-delay:.15s}
+.license-card:nth-child(5){animation-delay:.2s}
+.lic-num{width:38px;height:38px;background:var(--green-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:var(--green);flex-shrink:0;}
+.lic-name{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:4px;}
+.lic-auth{font-size:.8rem;color:var(--gray);margin-bottom:10px;}
+.lic-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.tag{background:var(--green-pale);color:var(--green);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+.tag.gold{background:#fdf6e3;color:#9a7226;}
+.lic-link{display:inline-flex;align-items:center;gap:5px;color:var(--green);text-decoration:none;font-size:.8rem;font-weight:600;padding:7px 14px;border:1.5px solid var(--green);border-radius:30px;transition:all .2s;white-space:nowrap;flex-shrink:0;}
+.lic-link:hover{background:var(--green);color:#fff;}
+
+.note-box{background:#fdf6e3;border:1px solid #e8d5a0;border-radius:14px;padding:16px 20px;margin-top:20px;}
+.note-box p{font-size:.85rem;color:#6b5a20;line-height:1.7;}
+
+.reset-btn{display:flex;align-items:center;gap:8px;background:none;border:2px solid var(--border);border-radius:30px;padding:10px 22px;font-family:'Tajawal',sans-serif;font-size:.9rem;font-weight:600;color:var(--gray);cursor:pointer;margin:28px auto 0;transition:all .2s;}
+.reset-btn:hover{border-color:var(--green);color:var(--green);}
+
+.hidden{display:none!important;}
+
+footer{text-align:center;padding:24px;color:var(--gray);font-size:.8rem;border-top:1px solid var(--border);}
+footer strong{color:var(--green);}
+
+@media(max-width:600px){
+  .card{padding:22px 16px;}
+  .choices-grid{grid-template-columns:1fr 1fr;}
+  .stats-row{grid-template-columns:1fr;}
+  .license-card{grid-template-columns:auto 1fr;}
+  .lic-link{grid-column:1/-1;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-badge">
+      <span class="dot"></span>
+      <span>🇸🇦 دليل تراخيص الأعمال السعودية</span>
+    </div>
+    <h1>اعرف تراخيصك <span>قبل ما تبدأ</span></h1>
+    <p>اختر نوع نشاطك ومدينتك — وخلّنا نجمع لك كل التراخيص المطلوبة، الرسوم، والروابط الرسمية في ثوانٍ.</p>
+  </div>
+</header>
+
+<main>
+
+  <div class="steps-bar">
+    <div class="step-item active" id="s1"><div class="step-num">١</div><div class="step-label">النشاط</div></div>
+    <div class="step-line" id="line1"></div>
+    <div class="step-item" id="s2"><div class="step-num">٢</div><div class="step-label">المدينة</div></div>
+    <div class="step-line" id="line2"></div>
+    <div class="step-item" id="s3"><div class="step-num">٣</div><div class="step-label">الدفع</div></div>
+    <div class="step-line" id="line3"></div>
+    <div class="step-item" id="s4"><div class="step-num">٤</div><div class="step-label">النتائج</div></div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="card" id="step1">
+    <div class="card-title">ما نوع نشاطك التجاري؟</div>
+    <div class="card-sub">اختر الأقرب لمشروعك</div>
+    <div class="choices-grid">
+      <button class="choice-btn" onclick="selectType(this,'restaurant')"><span class="choice-icon">🍽️</span><span class="choice-label">مطعم أو كافيه</span></button>
+      <button class="choice-btn" onclick="selectType(this,'retail')"><span class="choice-icon">🛍️</span><span class="choice-label">محل تجاري / تجزئة</span></button>
+      <button class="choice-btn" onclick="selectType(this,'salon')"><span class="choice-icon">✂️</span><span class="choice-label">صالون حلاقة / تجميل</span></button>
+      <button class="choice-btn" onclick="selectType(this,'consulting')"><span class="choice-icon">💼</span><span class="choice-label">مكتب استشارات / خدمات</span></button>
+      <button class="choice-btn" onclick="selectType(this,'grocery')"><span class="choice-icon">🛒</span><span class="choice-label">بقالة / سوبرماركت</span></button>
+      <button class="choice-btn" onclick="selectType(this,'tech')"><span class="choice-icon">💻</span><span class="choice-label">شركة تقنية / برمجيات</span></button>
+    </div>
+    <button class="cta-btn" id="btn1" disabled onclick="goToStep2()">التالي ← اختر مدينتك</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card hidden" id="step2">
+    <div class="card-title">في أي مدينة سيكون نشاطك؟</div>
+    <div class="card-sub">بعض المتطلبات تختلف حسب الأمانة</div>
+    <div class="city-grid">
+      <button class="city-btn" onclick="selectCity(this,'riyadh')">الرياض</button>
+      <button class="city-btn" onclick="selectCity(this,'jeddah')">جدة</button>
+      <button class="city-btn" onclick="selectCity(this,'dammam')">الدمام</button>
+      <button class="city-btn" onclick="selectCity(this,'mecca')">مكة المكرمة</button>
+      <button class="city-btn" onclick="selectCity(this,'medina')">المدينة المنورة</button>
+      <button class="city-btn" onclick="selectCity(this,'khobar')">الخبر</button>
+      <button class="city-btn" onclick="selectCity(this,'tabuk')">تبوك</button>
+      <button class="city-btn" onclick="selectCity(this,'other')">مدينة أخرى</button>
+    </div>
+    <button class="cta-btn" id="btn2" disabled onclick="goToPayment()">التالي ← الدفع</button>
+  </div>
+
+  <!-- STEP 3: PAYMENT -->
+  <div id="step3" class="hidden">
+    <div class="pay-card">
+      <div class="pay-preview">
+        <div class="preview-icon" id="gateIcon">🏢</div>
+        <div class="preview-title" id="gateTitle"></div>
+        <div class="preview-sub" id="gateSub"></div>
+        <div class="preview-badges" id="gateBadges"></div>
+      </div>
+      <div class="blurred-list" id="blurList"></div>
+      <div class="pay-action">
+        <div class="price-row"><span class="price-amount">٢</span><span class="price-cur">ريال فقط</span></div>
+        <div class="price-desc">استعلام واحد &nbsp;•&nbsp; نتيجة فورية &nbsp;•&nbsp; بدون اشتراك</div>
+        <div class="pay-methods">
+          <span class="pay-method">💳 بطاقة بنكية</span>
+          <span class="pay-method">🍎 Apple Pay</span>
+          <span class="pay-method">🟢 STC Pay</span>
+          <span class="pay-method">💚 مدى</span>
+        </div>
+        <button class="pay-btn" id="payBtn" onclick="processPay()">ادفع ٢ ريال واكتشف التراخيص ←</button>
+        <div class="pay-secure">🔒 دفع آمن ومشفّر</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4: RESULTS -->
+  <div id="step4" class="hidden">
+    <div class="result-header">
+      <div class="result-icon" id="resIcon">🏢</div>
+      <div><h2 id="resTitle"></h2><p id="resSub"></p></div>
+    </div>
+    <div class="stats-row" id="statsRow"></div>
+    <div class="license-list" id="licList"></div>
+    <div class="note-box">
+      <p>⚠️ هذه المعلومات للإرشاد فقط. تحقق رسمياً عبر <strong>balady.gov.sa</strong> و <strong>business.gov.sa</strong> قبل اتخاذ أي إجراء.</p>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">⟳ ابدأ استعلاماً جديداً</button>
+  </div>
+
+</main>
+
+<footer><p>رخّصلي &nbsp;|&nbsp; <strong>نسخة تجريبية ١.٠</strong> &nbsp;|&nbsp; balady.gov.sa &nbsp;•&nbsp; business.gov.sa</p></footer>
+
+<div class="toast" id="toast">✅ تمت عملية الدفع بنجاح!</div>
+
+<script>
+var DATA = {
+  restaurant:{icon:'🍽️',label:'مطعم / كافيه',time:'٤–٨ أسابيع',cost:'٣٬٠٠٠–٧٬٠٠٠',count:5,licenses:[
+    {name:'السجل التجاري',auth:'وزارة التجارة',fee:'~١٢٠٠ ريال',dur:'١–٣ أيام',url:'https://cr.mc.gov.sa',btn:'سجّل الآن'},
+    {name:'الترخيص البلدي',auth:'أمانة المنطقة (بلدي)',fee:'يبدأ من ٥٠٠ ريال',dur:'٢–٤ أسابيع',url:'https://balady.gov.sa',btn:'منصة بلدي'},
+    {name:'شهادة السلامة',auth:'الدفاع المدني',fee:'٣٠٠–١٠٠٠ ريال',dur:'١–٢ أسبوع',url:'https://998.gov.sa',btn:'الدفاع المدني'},
+    {name:'شهادة الصحة البيئية',auth:'وزارة الصحة / البلدية',fee:'٢٠٠–٥٠٠ ريال',dur:'١–٢ أسبوع',url:'https://moh.gov.sa',btn:'وزارة الصحة'},
+    {name:'تسجيل في نظام العمل (قوى)',auth:'وزارة الموارد البشرية',fee:'مجاني',dur:'١–٣ أيام',url:'https://qiwa.sa',btn:'منصة قوى'}
+  ]},
+  retail:{icon:'🛍️',label:'محل تجاري / تجزئة',time:'٢–٤ أسابيع',cost:'١٬٥٠٠–٤٬٠٠٠',count:3,licenses:[
+    {name:'السجل التجاري',auth:'وزارة التجارة',fee:'~١٢٠٠ ريال',dur:'١–٣ أيام',url:'https://cr.mc.gov.sa',btn:'سجّل الآن'},
+    {name:'الترخيص البلدي',auth:'أمانة المنطقة (بلدي)',fee:'٣٠٠–٨٠٠ ريال',dur:'١–٣ أسابيع',url:'https://balady.gov.sa',btn:'منصة بلدي'},
+    {name:'تسجيل في نظام العمل (قوى)',auth:'وزارة الموارد البشرية',fee:'مجاني',dur:'١–٣ أيام',url:'https://qiwa.sa',btn:'منصة قوى'}
+  ]},
+  salon:{icon:'✂️',label:'صالون حلاقة / تجميل',time:'٣–٦ أسابيع',cost:'٢٬٠٠٠–٥٬٠٠٠',count:4,licenses:[
+    {name:'السجل التجاري',auth:'وزارة التجارة',fee:'~١٢٠٠ ريال',dur:'١–٣ أيام',url:'https://cr.mc.gov.sa',btn:'سجّل الآن'},
+    {name:'الترخيص البلدي',auth:'أمانة المنطقة (بلدي)',fee:'٣٠٠–٧٠٠ ريال',dur:'٢–٣ أسابيع',url:'https://balady.gov.sa',btn:'منصة بلدي'},
+    {name:'شهادة الصحة البيئية',auth:'البلدية / وزارة الصحة',fee:'٢٠٠–٤٠٠ ريال',dur:'١ أسبوع',url:'https://moh.gov.sa',btn:'وزارة الصحة'},
+    {name:'تسجيل في نظام العمل (قوى)',auth:'وزارة الموارد البشرية',fee:'مجاني',dur:'١–٣ أيام',url:'https://qiwa.sa',btn:'منصة قوى'}
+  ]},
+  consulting:{icon:'💼',label:'مكتب استشارات / خدمات',time:'١–٣ أسابيع',cost:'١٬٢٠٠–٣٬٠٠٠',count:3,licenses:[
+    {name:'السجل التجاري',auth:'وزارة التجارة',fee:'~١٢٠٠ ريال',dur:'١–٣ أيام',url:'https://cr.mc.gov.sa',btn:'سجّل الآن'},
+    {name:'الترخيص البلدي',auth:'أمانة المنطقة (بلدي)',fee:'٢٠٠–٥٠٠ ريال',dur:'١–٢ أسبوع',url:'https://balady.gov.sa',btn:'منصة بلدي'},
+    {name:'تسجيل في نظام العمل (قوى)',auth:'وزارة الموارد البشرية',fee:'مجاني',dur:'١–٣ أيام',url:'https://qiwa.sa',btn:'منصة قوى'}
+  ]},
+  grocery:{icon:'🛒',label:'بقالة / سوبرماركت',time:'٣–٦ أسابيع',cost:'٢٬٠٠٠–٥٬٠٠٠',count:4,licenses:[
+    {name:'السجل التجاري',auth:'وزارة التجارة',fee:'~١٢٠٠ ريال',dur:'١–٣ أيام',url:'https://cr.mc.gov.sa',btn:'سجّل الآن'},
+    {name:'الترخيص البلدي',auth:'أمانة المنطقة (بلدي)',fee:'٣٠٠–٧٠٠ ريال',dur:'٢–٣ أسابيع',url:'https://balady.gov.sa',btn:'منصة بلدي'},
+    {name:'شهادة الصحة البيئية',auth:'البلدية / وزارة الصحة',fee:'٢٠٠–٤٠٠ ريال',dur:'١ أسبوع',url:'https://moh.gov.sa',btn:'وزارة الصحة'},
+    {name:'تسجيل في نظام العمل (قوى)',auth:'وزارة الموارد البشرية',fee:'مجاني',dur:'١–٣ أيام',url:'https://qiwa.sa',btn:'منصة قوى'}
+  ]},
+  tech:{icon:'💻',label:'شركة تقنية / برمجيات',time:'١–٣ أسابيع',cost:'١٬٢٠٠–٣٬٠٠٠',count:3,licenses:[
+    {name:'السجل التجاري',auth:'وزارة التجارة',fee:'~١٢٠٠ ريال',dur:'١–٣ أيام',url:'https://cr.mc.gov.sa',btn:'سجّل الآن'},
+    {name:'الترخيص البلدي',auth:'أمانة المنطقة (بلدي)',fee:'٢٠٠–٥٠٠ ريال',dur:'١–٢ أسبوع',url:'https://balady.gov.sa',btn:'منصة بلدي'},
+    {name:'تسجيل في نظام العمل (قوى)',auth:'وزارة الموارد البشرية',fee:'مجاني',dur:'١–٣ أيام',url:'https://qiwa.sa',btn:'منصة قوى'}
+  ]}
+};
+
+var CITIES = {riyadh:'الرياض',jeddah:'جدة',dammam:'الدمام',mecca:'مكة المكرمة',medina:'المدينة المنورة',khobar:'الخبر',tabuk:'تبوك',other:'مدينة أخرى'};
+
+var chosenType = null, chosenCity = null;
+
+function el(id){ return document.getElementById(id); }
+function show(id){ el(id).classList.remove('hidden'); }
+function hide(id){ el(id).classList.add('hidden'); }
+
+function selectType(btn, type) {
+  document.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  chosenType = type;
+  el('btn1').disabled = false;
+}
+
+function selectCity(btn, city) {
+  document.querySelectorAll('.city-btn').forEach(function(b){ b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  chosenCity = city;
+  el('btn2').disabled = false;
+}
+
+function setStep(n) {
+  ['s1','s2','s3','s4'].forEach(function(id, i) {
+    var e = el(id);
+    e.classList.remove('active','done');
+    if (i+1 < n) e.classList.add('done');
+    if (i+1 === n) e.classList.add('active');
+  });
+  ['line1','line2','line3'].forEach(function(id, i){
+    el(id).classList.toggle('done', i+1 < n);
+  });
+}
+
+function goToStep2() {
+  hide('step1'); show('step2'); setStep(2);
+}
+
+function goToPayment() {
+  hide('step2'); show('step3'); setStep(3);
+  var d = DATA[chosenType];
+  el('gateIcon').textContent = d.icon;
+  el('gateTitle').textContent = d.label + ' — ' + CITIES[chosenCity];
+  el('gateSub').textContent = 'وجدنا ' + d.count + ' تراخيص مطلوبة';
+  el('gateBadges').innerHTML =
+    '<span class="preview-badge">📋 ' + d.count + ' تراخيص</span>' +
+    '<span class="preview-badge">⏱️ ' + d.time + '</span>' +
+    '<span class="preview-badge">💰 ' + d.cost + ' ريال</span>';
+  var rows = '';
+  for (var i = 0; i < d.licenses.length; i++) {
+    rows += '<div class="blur-row"><div class="blur-num">'+(i+1)+'</div><div class="blur-content"><div class="blur-bar"></div><div class="blur-bar sm"></div></div><div class="blur-lock">🔒</div></div>';
+  }
+  el('blurList').innerHTML = rows;
+}
+
+function processPay() {
+  var btn = el('payBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ جاري معالجة الدفع...';
+  setTimeout(function() {
+    var toast = el('toast');
+    toast.classList.add('show');
+    setTimeout(function(){ toast.classList.remove('show'); }, 3000);
+    setTimeout(function(){ hide('step3'); showResults(); }, 500);
+  }, 1800);
+}
+
+function showResults() {
+  show('step4'); setStep(4);
+  var d = DATA[chosenType];
+  el('resIcon').textContent = d.icon;
+  el('resTitle').textContent = d.label + ' — ' + CITIES[chosenCity];
+  el('resSub').textContent = 'وجدنا ' + d.count + ' تراخيص يجب إتمامها قبل البدء';
+  el('statsRow').innerHTML =
+    '<div class="stat-box"><div class="stat-val">'+d.count+'</div><div class="stat-lbl">عدد التراخيص</div></div>' +
+    '<div class="stat-box"><div class="stat-val" style="font-size:1rem">'+d.time+'</div><div class="stat-lbl">الوقت الإجمالي</div></div>' +
+    '<div class="stat-box"><div class="stat-val" style="font-size:.9rem">'+d.cost+'</div><div class="stat-lbl">التكلفة (ريال)</div></div>';
+  var html = '';
+  for (var i = 0; i < d.licenses.length; i++) {
+    var l = d.licenses[i];
+    html += '<div class="license-card">' +
+      '<div class="lic-num">'+(i+1)+'</div>' +
+      '<div><div class="lic-name">'+l.name+'</div><div class="lic-auth">📍 '+l.auth+'</div>' +
+      '<div class="lic-tags"><span class="tag">💰 '+l.fee+'</span><span class="tag gold">⏱️ '+l.dur+'</span></div></div>' +
+      '<a class="lic-link" href="'+l.url+'" target="_blank">↗ '+l.btn+'</a>' +
+      '</div>';
+  }
+  el('licList').innerHTML = html;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function resetAll() {
+  chosenType = null; chosenCity = null;
+  hide('step2'); hide('step3'); hide('step4'); show('step1');
+  document.querySelectorAll('.choice-btn,.city-btn').forEach(function(b){ b.classList.remove('selected'); });
+  el('btn1').disabled = true;
+  el('btn2').disabled = true;
+  el('payBtn').disabled = false;
+  el('payBtn').textContent = 'ادفع ٢ ريال واكتشف التراخيص ←';
+  setStep(1);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

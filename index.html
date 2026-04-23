@@ -124,6 +124,22 @@ main{max-width:860px;margin:0 auto;padding:40px 20px 80px;}
 .reset-btn{display:flex;align-items:center;gap:8px;background:none;border:2px solid var(--border);border-radius:30px;padding:10px 22px;font-family:'Tajawal',sans-serif;font-size:.9rem;font-weight:600;color:var(--gray);cursor:pointer;margin:28px auto 0;transition:all .2s;}
 .reset-btn:hover{border-color:var(--green);color:var(--green);}
 
+/* VIOLATIONS */
+.viol-header{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#4a0d0d,#8b1a1a);border-radius:16px;padding:20px 24px;margin-top:24px;margin-bottom:16px;color:#fff;}
+.viol-header-icon{font-size:2rem;flex-shrink:0;}
+.viol-header-title{font-family:'Cairo',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:3px;}
+.viol-header-sub{font-size:.8rem;color:rgba(255,255,255,.65);}
+.viol-list{display:flex;flex-direction:column;gap:12px;}
+.viol-card{background:#fff;border:1.5px solid #f5d5d5;border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;box-shadow:0 2px 12px rgba(180,0,0,0.06);animation:fadeUp .4s ease both;}
+.viol-card:nth-child(2){animation-delay:.05s}
+.viol-card:nth-child(3){animation-delay:.1s}
+.viol-card:nth-child(4){animation-delay:.15s}
+.viol-icon{font-size:1.6rem;flex-shrink:0;margin-top:2px;}
+.viol-name{font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:5px;}
+.viol-fine{font-size:.82rem;color:#c0392b;margin-bottom:6px;}
+.viol-fine strong{font-weight:800;}
+.viol-tip{font-size:.8rem;color:var(--gray);line-height:1.6;}
+
 .hidden{display:none!important;}
 
 footer{text-align:center;padding:24px;color:var(--gray);font-size:.8rem;border-top:1px solid var(--border);}
@@ -231,6 +247,21 @@ footer strong{color:var(--green);}
     <div class="note-box">
       <p>⚠️ هذه المعلومات للإرشاد فقط. تحقق رسمياً عبر <strong>balady.gov.sa</strong> و <strong>business.gov.sa</strong> قبل اتخاذ أي إجراء.</p>
     </div>
+
+    <!-- VIOLATIONS -->
+    <div class="viol-header">
+      <span class="viol-header-icon">🚨</span>
+      <div>
+        <div class="viol-header-title">مخالفات شائعة — تجنّبها من البداية</div>
+        <div class="viol-header-sub">بيانات رسمية من جدول الجزاءات البلدية ٢٠٢٦</div>
+      </div>
+    </div>
+    <div class="viol-list" id="violList"></div>
+
+    <div class="note-box" style="margin-top:14px">
+      <p>📄 المصدر: جدول الجزاءات عن المخالفات البلدية — وزارة البلديات والإسكان، مارس ٢٠٢٦. الغرامات تختلف حسب تصنيف الأمانة.</p>
+    </div>
+
     <button class="reset-btn" onclick="resetAll()">⟳ ابدأ استعلاماً جديداً</button>
   </div>
 
@@ -366,8 +397,63 @@ function showResults() {
       '</div>';
   }
   el('licList').innerHTML = html;
+
+  // VIOLATIONS
+  var v = VIOLATIONS[chosenType];
+  var vhtml = '';
+  for (var j = 0; j < v.length; j++) {
+    var viol = v[j];
+    vhtml += '<div class="viol-card">' +
+      '<div class="viol-icon">' + viol.icon + '</div>' +
+      '<div class="viol-body">' +
+        '<div class="viol-name">' + viol.name + '</div>' +
+        '<div class="viol-fine">⚠️ غرامة تصل إلى <strong>' + viol.fine + ' ريال</strong>' + (viol.close ? ' + إغلاق المحل' : '') + '</div>' +
+        '<div class="viol-tip">💡 ' + viol.tip + '</div>' +
+      '</div>' +
+    '</div>';
+  }
+  el('violList').innerHTML = vhtml;
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
+var VIOLATIONS = {
+  restaurant:[
+    {icon:'🪧',name:'عدم مطابقة اللوحة للمواصفات والاشتراطات',fine:'١٬٠٠٠',close:false,tip:'تأكد أن لوحتك متوافقة مع ألوان المحيط التجاري واشتراطات الأمانة قبل التركيب.'},
+    {icon:'🧹',name:'إهمال النظافة أو تراكم النفايات',fine:'١٬٠٠٠',close:false,tip:'المفتش يتفقد النظافة العامة والمخزن والمطبخ — حافظ على النظافة يومياً.'},
+    {icon:'📋',name:'عدم وجود ملصقات الواجهة (أوقات العمل، QR، الدفع)',fine:'١٬٠٠٠',close:false,tip:'الواجهة لازم فيها: ساعات الدوام، رقم QR الترخيص، وملصق رقم الدفع الإلكتروني.'},
+    {icon:'🩺',name:'تشغيل عمالة بدون شهادات صحية',fine:'١٬٠٠٠',close:false,tip:'كل موظف في المطعم يحتاج شهادة صحية سارية — جددها قبل انتهائها.'},
+    {icon:'🕐',name:'ممارسة النشاط خارج أوقات الترخيص',fine:'٥٬٠٠٠',close:false,tip:'الفتح بعد وقت الإغلاق المرخص مخالفة — إذا تبي تمدد احصل على تصريح مسبق.'}
+  ],
+  retail:[
+    {icon:'🪧',name:'عدم مطابقة اللوحة التجارية للاشتراطات',fine:'١٬٠٠٠',close:false,tip:'تأكد من تطابق اللوحة مع بيانات الترخيص والمواصفات المعتمدة.'},
+    {icon:'📋',name:'عدم وجود ملصقات الواجهة المطلوبة',fine:'١٬٠٠٠',close:false,tip:'أوقات الدوام وQR الترخيص ورقم الدفع الإلكتروني — كلها إلزامية على الواجهة.'},
+    {icon:'📦',name:'ممارسة نشاط خارج نطاق الترخيص',fine:'٢٬٠٠٠',close:false,tip:'لا تبيع منتجات خارج نشاطك المرخص — إذا أضفت منتجات جديدة حدّث ترخيصك أولاً.'},
+    {icon:'🧹',name:'عدم الالتزام باشتراطات النظافة العامة',fine:'١٬٠٠٠',close:false,tip:'النظافة والترتيب وسلامة الزجاج والواجهة كلها تحت مجهر المفتش.'}
+  ],
+  salon:[
+    {icon:'🪧',name:'عدم مطابقة اللوحة للاشتراطات',fine:'١٬٠٠٠',close:false,tip:'لون اللوحة يجب أن يتناسب مع المحيط التجاري — هذا كان سبب مخالفة كثير من الصالونات.'},
+    {icon:'🩺',name:'تشغيل عمالة بدون شهادات صحية',fine:'١٬٠٠٠',close:false,tip:'شهادة صحية لكل موظف إلزامية ويجب تجديدها سنوياً.'},
+    {icon:'🧴',name:'عدم الالتزام باشتراطات التعقيم والنظافة',fine:'١٬٠٠٠',close:false,tip:'الأدوات المستخدمة مرة واحدة ممنوع إعادة استخدامها — التعقيم المستمر ضروري.'},
+    {icon:'📋',name:'غياب ملصقات الواجهة المطلوبة',fine:'١٬٠٠٠',close:false,tip:'أوقات العمل وQR الترخيص إلزامية على واجهة الصالون.'}
+  ],
+  consulting:[
+    {icon:'🪧',name:'عدم مطابقة اللوحة لبيانات الترخيص',fine:'١٬٠٠٠',close:false,tip:'اسم المكتب واللوحة يجب أن تطابق بيانات الترخيص تماماً.'},
+    {icon:'📋',name:'عدم وجود ملصقات الواجهة',fine:'١٬٠٠٠',close:false,tip:'حتى مكاتب الاستشارات مطلوب منها ملصقات أوقات الدوام وQR الترخيص.'},
+    {icon:'🏢',name:'ممارسة نشاط إضافي غير مضاف للرخصة',fine:'٣٬٠٠٠',close:false,tip:'إذا أضفت خدمة جديدة لمكتبك أضفها أولاً على الترخيص قبل الممارسة.'}
+  ],
+  grocery:[
+    {icon:'🧹',name:'إهمال النظافة أو تراكم النفايات',fine:'١٬٠٠٠',close:false,tip:'البقالة من أكثر الأنشطة تفتيشاً — النظافة اليومية ضرورة.'},
+    {icon:'🪧',name:'عدم مطابقة اللوحة للاشتراطات',fine:'١٬٠٠٠',close:false,tip:'لون اللوحة يجب أن يتوافق مع المحيط — إذا جنبك محطة بنزين تحقق من الاشتراطات.'},
+    {icon:'📋',name:'غياب ملصقات الواجهة المطلوبة',fine:'١٬٠٠٠',close:false,tip:'أوقات العمل وQR الترخيص وملصق الدفع الإلكتروني — كلها إلزامية.'},
+    {icon:'🩺',name:'تشغيل عمالة بدون شهادات صحية',fine:'١٬٠٠٠',close:false,tip:'كل موظف في البقالة يحتاج شهادة صحية سارية.'},
+    {icon:'📦',name:'ممارسة نشاط خارج نطاق الترخيص',fine:'٢٬٠٠٠',close:false,tip:'لا تبيع منتجات خارج نطاق نشاطك المرخص.'}
+  ],
+  tech:[
+    {icon:'🪧',name:'عدم مطابقة اللوحة لبيانات الترخيص',fine:'١٬٠٠٠',close:false,tip:'اسم الشركة على اللوحة يجب مطابقة السجل التجاري والترخيص البلدي تماماً.'},
+    {icon:'📋',name:'غياب ملصقات الواجهة',fine:'١٬٠٠٠',close:false,tip:'حتى شركات التقنية مطلوب منها ملصقات أوقات الدوام وQR الترخيص على المدخل.'},
+    {icon:'🏢',name:'ممارسة نشاط إضافي غير مرخص',fine:'٣٬٠٠٠',close:false,tip:'إذا أضفت خدمة جديدة للشركة حدّث الترخيص قبل الممارسة.'}
+  ]
+};
 
 function resetAll() {
   chosenType = null; chosenCity = null;
